@@ -12,8 +12,12 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.create(list_params)
-    # redirect_to @list, notice: 'New list was created.'
+    @list = List.new(list_params)
+    if @list.save
+      redirect_to list_path(@list)
+    else
+      render :new
+    end
   end
 
   private
